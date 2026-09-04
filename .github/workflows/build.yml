@@ -7,7 +7,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Run Pake build
-        uses: tw93/pake/.github/actions/build@master
+        uses: tw93/pake/.github/actions/build@main
         with:
           url: "https://www.haisnap.com"
           name: "响指HaiSnap"
