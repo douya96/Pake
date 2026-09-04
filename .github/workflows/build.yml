@@ -1,0 +1,16 @@
+name: Pake Build Windows
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Run Pake build
+        uses: tw93/pake/.github/actions/build@master
+        with:
+          url: "https://www.haisnap.com"
+          name: "响指HaiSnap"
+          width: 1200
+          height: 800
+          target: windows
