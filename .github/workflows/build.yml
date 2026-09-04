@@ -6,23 +6,26 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Install pake‑cli
         run: npm install -g pake-cli
 
-      - name: Build Windows App
+      - name: Build App
         run: |
-          pake "https://www.haisnap.com" --name "响指HaiSnap" --width 1200 --height 800 --target windows
+          pake "https://www.haisnap.com" --name "响指HaiSnap" --width 1200 --height 800 --targets windows
 
-      - name: Upload build artifact
+      - name: Upload exe artifact
         uses: actions/upload-artifact@v4
         with:
           name: 响指HaiSnap‑windows
-          path: ./dist/*.exe
+          path: dist/*.exe
