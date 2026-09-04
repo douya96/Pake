@@ -6,11 +6,23 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Run Pake build
-        uses: tw93/pake/.github/actions/build@main
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          url: "https://www.haisnap.com"
-          name: "响指HaiSnap"
-          width: 1200
-          height: 800
-          target: windows
+          node-version: 20
+
+      - name: Install pake‑cli
+        run: npm install -g pake-cli
+
+      - name: Build Windows App
+        run: |
+          pake "https://www.haisnap.com" --name "响指HaiSnap" --width 1200 --height 800 --target windows
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 响指HaiSnap‑windows
+          path: ./dist/*.exe
